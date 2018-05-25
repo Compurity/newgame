@@ -7,8 +7,6 @@ public class Enemies
 	private int speed;
 	private int mana;
 	
-	ArrayList<Enemies> allEnemies = new ArrayList<Enemies>();
-	
 	public Enemies(int a, int b, double c, int d, int e)
 	{
 		a = health;
@@ -25,12 +23,8 @@ public class Enemies
 	 	speed = 20
 	 	mana = 100
 	}
-	public int getHealth
+	public void creep()
 	{
-		return health;
-	}
-	public ArrayList<Integer> getAllEnemies()
-	{
-		return allEnemies<>;
+		//creates objects which are enemies of current wave, once creep dies, object is removed.
 	}
 }
