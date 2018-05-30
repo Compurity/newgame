@@ -29,7 +29,8 @@ public class Enemy
 		speed = d;
 		mana = e;
 	}
-	
-	
-	
+	public int getHealth()
+	{
+		return health;
+	}
 }
