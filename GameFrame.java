@@ -89,39 +89,39 @@ public class GameFrame extends JFrame
 		int corner4y=y+size;*/
 		
 		if(LEFT && UP) {
-			player.X--;player.Y--; 
+			player.X-=5;player.Y-=5; 
 		} else if(RIGHT && UP) {
-			player.X++;player.Y--;
+			player.X+=5;player.Y-=5;
 		}else if(LEFT && DOWN) {
-			player.X--;player.Y++;
+			player.X-=5;player.Y+=5;
 		}else if(RIGHT && DOWN) {
-			player.X++;player.Y++;
+			player.X+=5;player.Y+=5;
 		}else if(RIGHT) {
-			player.X++;
+			player.X+=5;
 		}else if(LEFT) {
-			player.X--;
+			player.X-=5;
 		}else if(UP) {
-			player.Y--;
+			player.Y-=5;
 		}else if(DOWN) {
-			player.Y++;
+			player.Y+=5;
 		}
 		
 		//player.Y-player.H >= point.Y && player.Y <= point.Y
 		
-		/*if(x> CANVAS_WIDTH-size ||x<0  ){
-			xSpeed=-xSpeed;
+		if(player.X > CANVAS_WIDTH){
+			player.X = CANVAS_WIDTH;
 		}
-		if(y>CANVAS_HEIGHT-size||y<0 ){
-			ySpeed=-ySpeed;
+		if(player.Y>=694){
+			player.Y = 690;
 		}
-		x2+=xSpeed2;
-		y2+= ySpeed2;
-		if(x2> CANVAS_WIDTH-size ||x2<0){
-			xSpeed2=-xSpeed2;
+		if(player.X<0){
+			player.X = 0;
 		}
-		if(y2>CANVAS_HEIGHT-size||y2<0 ){
-			ySpeed2=-ySpeed2;
-		}*/
+		if(player.Y<0){
+			player.Y = 0;
+		}
+		
+	
 		
 		}
 		private class DrawCanvas extends JPanel
@@ -132,7 +132,7 @@ public class GameFrame extends JFrame
 			super.paintComponent(g);
 			setBackground(Color.WHITE);
 			g.drawRect(player.X, player.Y, player.W, player.H);
-			g.drawLine(0,800, 1585, 800);
+			g.drawLine(0,700, 1585, 700);
 			//g.setColor(Color.WHITE);
 			//g.fillRect(x,y,size,size);
 			//g.setColor(Color.RED);
