@@ -7,14 +7,11 @@ public class Enemy
 	private int speed;
 	private int mana;
 	
-	public Enemy(int a, int b, double c, int d, int e)
-	{
-		health = a;
-		damage = b;
-		attSpeed = c;
-		speed = d;
-		mana = e;
-	}
+	public int X;
+	public int Y;
+	public int H;
+	public int W;
+	
 	public Enemy()
 	{
 	 	health = 200 + (20 * Waves.getCurrentWave());
@@ -23,8 +20,16 @@ public class Enemy
 	 	speed = 20;
 	 	mana = 100 + (5 * Waves.getCurrentWave());
 	}
-	public void creep()
+	
+	public Enemy(int a, int b, double c, int d, int e)
 	{
-		//creates objects which are enemies of current wave, once creep dies, object is removed.
+		health = a;
+		damage = b;
+		attSpeed = c;
+		speed = d;
+		mana = e;
 	}
+	
+	
+	
 }
