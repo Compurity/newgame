@@ -20,7 +20,8 @@ public class GameFrame extends JFrame
 	private int size =100;
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
 	
-	private static Player player; 
+	private static Player player;
+	private static Enemy enemy; 
 	private boolean LEFT,RIGHT,UP,DOWN; 
 	public GameFrame()
 	{
@@ -106,6 +107,21 @@ public class GameFrame extends JFrame
 			player.Y+=5;
 		}
 		
+		
+		
+		if(enemy.X1<player.X){
+			enemy.X1+=3; 
+		}
+		else if(enemy.X1>player.X){
+			enemy.X1-=3; 
+			
+		}if(enemy.Y1<player.Y){
+			enemy.Y1+=3;
+		}else if(enemy.Y1>player.Y){
+			enemy.Y1-=3;
+		}
+		
+		
 		//player.Y-player.H >= point.Y && player.Y <= point.Y
 		
 		if(player.X > CANVAS_WIDTH){
@@ -132,6 +148,7 @@ public class GameFrame extends JFrame
 			super.paintComponent(g);
 			setBackground(Color.WHITE);
 			g.drawRect(player.X, player.Y, player.W, player.H);
+			g.drawRect(enemy.X1, enemy.Y1, enemy.W1, enemy.H1);
 			g.drawLine(0,700, 1585, 700);
 			//g.setColor(Color.WHITE);
 			//g.fillRect(x,y,size,size);
@@ -143,6 +160,7 @@ public class GameFrame extends JFrame
 		
 	public static void main(String[]args){
 		player = new Player(); 
+		enemy = new Enemy();
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run(){
