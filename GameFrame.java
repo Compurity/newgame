@@ -1,10 +1,17 @@
-package game;
+
+
 import java.awt.*;
+
 import java.awt.event.*;
+
 import java.awt.geom.*;
+
 import java.util.Random;
+
 import javax.swing.*;
+
 public class GameFrame extends JFrame{
+
 	private static final int CANVAS_WIDTH=1585;
 
 	private static final int CANVAS_HEIGHT= 822;
@@ -16,7 +23,7 @@ public class GameFrame extends JFrame{
 	private DrawCanvas canvas;
 	
 	private int oop = 5;
-	private int oof = 6;
+	private int oof = 500;
 
 	private int x=100, y=100, x2=300, y2=300;
 
@@ -147,19 +154,12 @@ public class GameFrame extends JFrame{
 		y+= ySpeed;
 
 		/*int corner1x=x;
-
 		int corner1y=y;
-
 		int corner2x=x+size;
-
 		int corner2y=y;
-
 		int corner3x=x;
-
 		int corner3y=y+size;
-
 		int corner4x=x+size;
-
 		int corner4y=y+size;*/
 
 		
@@ -257,6 +257,21 @@ public class GameFrame extends JFrame{
 			player.Y = 0;
 
 		}
+		
+		if(player.X == enemy.X1 && player.Y == enemy.Y1)
+		{
+			oof = oof - 1;
+		}
+		else if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10)
+		{
+			oof = oof - 10;
+			enemy.X1 = enemy.X1 - 50;
+		}
+	//	else if(enemy.Y1 <= player.Y + 10 && enemy.X1 >= player.Y - 10)
+	//	{
+	//		oof = oof - 1;
+	//	}
+		
 
 		
 
