@@ -1,17 +1,10 @@
 package game;
-
 import java.awt.*;
-
 import java.awt.event.*;
-
 import java.awt.geom.*;
-
 import java.util.Random;
-
 import javax.swing.*;
-
 public class GameFrame extends JFrame{
-
 	private static final int CANVAS_WIDTH=1585;
 
 	private static final int CANVAS_HEIGHT= 822;
