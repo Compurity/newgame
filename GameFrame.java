@@ -257,27 +257,25 @@ public class GameFrame extends JFrame{
 			player.Y = 0;
 
 		}
-		
-		if(player.X == enemy.X1 && player.Y == enemy.Y1)
+		if(enemy.Y1 <= player.Y + 10 && enemy.Y1 >= player.Y - 10)
 		{
-			oof = oof - 1;
-		}
-		else if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10)
-		{
-			oof = oof - 10;
-			enemy.X1 = enemy.X1 - 50;
+			if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10 /*&& (enemy.Y1 > player.Y + 10 || enemy.Y1 < player.Y - 10)*/){
+				oof = oof - 10;
+				if(player.X > enemy.X1)
+					enemy.X1 = enemy.X1 - 50;
+				else if(player.X < enemy.X1)
+					enemy.X1 = enemy.X1 + 50;
+				else if(enemy.Y1 == player.Y + 10)
+					enemy.Y1 = enemy.Y1 + 50;
+				else
+					enemy.Y1 = enemy.Y1 - 50;
+			}
 		}
 	//	else if(enemy.Y1 <= player.Y + 10 && enemy.X1 >= player.Y - 10)
 	//	{
 	//		oof = oof - 1;
 	//	}
-		
-
-		
-
-	
-
-		
+			
 
 		}
 
@@ -339,13 +337,6 @@ public class GameFrame extends JFrame{
 				new GameFrame();
 
 			}
-
 		});
-
 	}
-
-	
-
-	
-
 }
