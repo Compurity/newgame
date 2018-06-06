@@ -306,6 +306,30 @@ public class GameFrame extends JFrame{
 	        g.drawString("Mana : " + oop,60,765);
 	        
 	        g.drawString("Enemies Alive : ",1200 ,750 );
+			g.drawLine(100,600,200,600);
+			g.drawLine(500,600,600,600);
+			//First Level Plats
+			g.drawLine(985,600,1085,600);
+			g.drawLine(1385,600,1485,600);
+			
+			
+			g.drawLine(300,500,400,500);
+			g.drawLine(700,500,800,500); //Second Level Plats
+			g.drawLine(1185,500,1285,500);
+			
+			
+			g.drawLine(100,400,200,400);
+			g.drawLine(500,400,600,400);
+			//Third Level Plats
+			g.drawLine(985,400,1085,400);
+			g.drawLine(1385,400,1485,400);
+			
+			
+			g.drawLine(300,300,400,300);
+			g.drawLine(700,300,800,300); //Fourth Level Plats
+			g.drawLine(1185,300,1285,300);
+			
+			
 
 			//g.setColor(Color.WHITE);
 
