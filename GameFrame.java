@@ -34,6 +34,8 @@ public class GameFrame extends JFrame{
 	private static Player player;
 
 	private static Enemy enemy; 
+	private static Music music;
+	
 
 	private boolean LEFT,RIGHT,UP,DOWN; 
 	
@@ -138,6 +140,7 @@ public class GameFrame extends JFrame{
 				update();
 
 				repaint();
+				Music.sound();
 
 			}
 
@@ -351,6 +354,8 @@ public class GameFrame extends JFrame{
 		player = new Player(); 
 
 		enemy = new Enemy();
+		
+		music = new Music();
 
 		SwingUtilities.invokeLater(new Runnable(){
 
@@ -359,9 +364,10 @@ public class GameFrame extends JFrame{
 			public void run(){
 
 				new GameFrame();
+				
 
 			}
 		});
 	}
 }
-     
+  
