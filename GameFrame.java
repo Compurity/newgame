@@ -1,5 +1,3 @@
-
-
 import java.awt.*;
 
 import java.awt.event.*;
@@ -253,6 +251,66 @@ public class GameFrame extends JFrame{
 
 			player.Y = 0;
 		}
+		//1st
+		if(player.X >= 100 && player.X <= 200 && player.Y >= 594 && player.Y <= 600 )
+		{
+			player.Y = 590;
+		}
+		if(player.X >= 500 && player.X <= 600 && player.Y >= 594 && player.Y <= 600 )
+		{
+			player.Y = 590;
+		}
+		if(player.X >= 985 && player.X <= 1085 && player.Y >= 594 && player.Y <= 600 )
+		{
+			player.Y = 590;
+		}
+		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 594 && player.Y <= 600 )
+		{
+			player.Y = 590;
+		}
+		//2nd
+		if(player.X >= 300 && player.X <= 400 && player.Y >= 494 && player.Y <= 500 )
+		{
+			player.Y = 490;
+		}
+		if(player.X >= 700 && player.X <= 800 && player.Y >= 494 && player.Y <= 500 )
+		{
+			player.Y = 490;
+		}
+		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 494 && player.Y <= 500 )
+		{
+			player.Y = 490;
+		}
+		//3rd
+		if(player.X >= 100 && player.X <= 200 && player.Y >= 394 && player.Y <= 400 )
+		{
+			player.Y = 390;
+		}
+		if(player.X >= 500 && player.X <= 600 && player.Y >= 394 && player.Y <= 400 )
+		{
+			player.Y = 390;
+		}
+		if(player.X >= 985 && player.X <= 1085 && player.Y >= 394 && player.Y <= 400 )
+		{
+			player.Y = 390;
+		}
+		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 394 && player.Y <= 400 )
+		{
+			player.Y = 390;
+		}
+		//4th
+		if(player.X >= 300 && player.X <= 400 && player.Y >= 294 && player.Y <= 300 )
+		{
+			player.Y = 290;
+		}
+		if(player.X >= 700 && player.X <= 800 && player.Y >= 294 && player.Y <= 300 )
+		{
+			player.Y = 290;
+		}
+		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 294 && player.Y <= 300 )
+		{
+			player.Y = 290;
+		}
 		
 		
 		
@@ -376,4 +434,5 @@ public class GameFrame extends JFrame{
 			}
 		});
 	}
+}
 }
