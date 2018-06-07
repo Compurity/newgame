@@ -33,9 +33,9 @@ public class GameFrame extends JFrame{
 
 	private static Player player;
 
-	private static Enemy enemy; 
-	private static Music music;
+	private static Enemy enemy;
 	
+	private static Enemy e1; 
 
 	private boolean LEFT,RIGHT,UP,DOWN; 
 	
@@ -140,7 +140,6 @@ public class GameFrame extends JFrame{
 				update();
 
 				repaint();
-				Music.sound();
 
 			}
 
@@ -151,7 +150,7 @@ public class GameFrame extends JFrame{
 	}
 
 	public void update(){
-
+	
 		x+=xSpeed;
 
 		y+= ySpeed;
@@ -199,13 +198,7 @@ public class GameFrame extends JFrame{
 
 			player.Y+=4;
 
-		}
-
-		
-
-		
-
-		
+		}	
 
 		if(enemy.X1<player.X){
 
@@ -228,7 +221,8 @@ public class GameFrame extends JFrame{
 			enemy.Y1-=2;
 
 		}
-
+		
+		
 		
 
 		
@@ -258,11 +252,32 @@ public class GameFrame extends JFrame{
 		if(player.Y<0){
 
 			player.Y = 0;
-
 		}
-		if(enemy.Y1 <= player.Y + 10 && enemy.Y1 >= player.Y - 10)
+		
+		
+		
+		for(int i = 0;i < 20; i++ )
 		{
-			if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10 /*&& (enemy.Y1 > player.Y + 10 || enemy.Y1 < player.Y - 10)*/){
+			if(enemy.Y1 <= player.Y + 10 && enemy.Y1 >= player.Y - 10)
+		{
+			if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10){
+				oof = oof - 10;
+				if(player.X > enemy.X1)
+					enemy.X1 = enemy.X1 - 50;
+				else if(player.X < enemy.X1)
+					enemy.X1 = enemy.X1 + 50;
+				else if(enemy.Y1 < player.Y)
+					enemy.Y1 = enemy.Y1 - 50;
+				else
+					enemy.Y1 = enemy.Y1 + 50;
+			}
+		}
+		}
+
+		
+	/*	if(enemy.Y1 <= player.Y + 10 && enemy.Y1 >= player.Y - 10)
+		{
+			if(enemy.X1 <= player.X + 10 && enemy.X1 >= player.X - 10){
 				oof = oof - 10;
 				if(player.X > enemy.X1)
 					enemy.X1 = enemy.X1 - 50;
@@ -273,13 +288,8 @@ public class GameFrame extends JFrame{
 				else
 					enemy.Y1 = enemy.Y1 - 50;
 			}
-		}
-	//	else if(enemy.Y1 <= player.Y + 10 && enemy.X1 >= player.Y - 10)
-	//	{
-	//		oof = oof - 1;
-	//	}
-			
-
+		}*/
+	
 		}
 
 		private class DrawCanvas extends JPanel
@@ -309,30 +319,6 @@ public class GameFrame extends JFrame{
 	        g.drawString("Mana : " + oop,60,765);
 	        
 	        g.drawString("Enemies Alive : ",1200 ,750 );
-			g.drawLine(100,600,200,600);
-			g.drawLine(500,600,600,600);
-			//First Level Plats
-			g.drawLine(985,600,1085,600);
-			g.drawLine(1385,600,1485,600);
-			
-			
-			g.drawLine(300,500,400,500);
-			g.drawLine(700,500,800,500); //Second Level Plats
-			g.drawLine(1185,500,1285,500);
-			
-			
-			g.drawLine(100,400,200,400);
-			g.drawLine(500,400,600,400);
-			//Third Level Plats
-			g.drawLine(985,400,1085,400);
-			g.drawLine(1385,400,1485,400);
-			
-			
-			g.drawLine(300,300,400,300);
-			g.drawLine(700,300,800,300); //Fourth Level Plats
-			g.drawLine(1185,300,1285,300);
-			
-			
 
 			//g.setColor(Color.WHITE);
 
@@ -354,8 +340,6 @@ public class GameFrame extends JFrame{
 		player = new Player(); 
 
 		enemy = new Enemy();
-		
-		music = new Music();
 
 		SwingUtilities.invokeLater(new Runnable(){
 
@@ -364,10 +348,8 @@ public class GameFrame extends JFrame{
 			public void run(){
 
 				new GameFrame();
-				
 
 			}
 		});
 	}
 }
-  
