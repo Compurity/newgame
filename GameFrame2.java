@@ -7,21 +7,23 @@ import javax.swing.JButton;
 public class GameFrame extends JFrame{
 	private static final int CANVAS_WIDTH=1585;
 	private static final int CANVAS_HEIGHT= 822;
-	private static final int UPDATE_PERIOD=25;
+	private int UPDATE_PERIOD=25;
 	private DrawCanvas canvas;
 	private int mana = 300;
 	private int health = 500;
+	private int gold = 0;
+	private int currentWave = 1;
 	//private int enemiesAlive = 9;
 	private int x=100, y=100, x2=300, y2=300;
 	private int size =100;
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
 	private static Player player;
 	private static Upgrades upgrades;
-	private static Enemy[] e1 = new Enemy[9]; 
+	private static Enemy[] e1 = new Enemy[9];
 	private boolean LEFT,RIGHT,UP,DOWN; 
-	private int sum;
+	public int sum;
 	private int manaRegen;
-
+	private boolean waveEnd = false;
 	public GameFrame()
 	{
 		canvas= new DrawCanvas();
@@ -70,9 +72,11 @@ public class GameFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				update();
-				repaint();
-				Upgrades.createAndShowGUI();
+				if(sum >= -165) {
+					System.out.println(sum);
+					update();
+					repaint();
+				}			
 			}
 		};
 		new Timer(UPDATE_PERIOD, updateTask).start();
@@ -235,13 +239,13 @@ public class GameFrame extends JFrame{
 			g.drawString("",60,730);
 	        g.drawString("Health : " + health,60,750);
 	        g.drawString("Mana : " + mana,60,765);
+	        g.drawString("Wave : " + currentWave,60, 780);
 	        //g.drawString("Enemies Alive : " + enemiesAlive,1200 ,750 );
 	       	g.drawLine(100,600,200,600);
 			g.drawLine(500,600,600,600);
 			//First Level Plats
 			g.drawLine(985,600,1085,600);
 			g.drawLine(1385,600,1485,600);
-			
 			g.drawLine(300,500,400,500);
 			g.drawLine(700,500,800,500); //Second Level Plats
 			g.drawLine(1185,500,1285,500);
@@ -259,10 +263,9 @@ public class GameFrame extends JFrame{
 			//g.fillRect(x,y,size,size);
 			//g.setColor(Color.RED);
 			//g.fillRect(x2, y2, size, size);
-			JButton button1 = new JButton();
+			/*JButton button1 = new JButton();
 			button1.setText("Java Code Geeks");
-			add(button1);
-
+			add(button1);*/
 		
 			for(int i = 0; i < e1.length; i++)
 			{
@@ -276,16 +279,23 @@ public class GameFrame extends JFrame{
 						e1[i].Y1 = -20;
 					}
 				}
-				sum = sum + e1[i].X1;
+				sum = 0;
+				for(int q = 0; q < e1.length; q++)
+					sum = sum + e1[q].X1;
 				if(sum <= -170)
 				{
-					g.drawRect(500, 100, 500, 500);
-				//	JButton button1 = new JButton();
-
+					//g.drawRect(500, 100, 500, 500);
 				}
-					
+				if(sum <= -165)
+				{
+					if(waveEnd == false) {
+						gold = gold + 250;
+						currentWave = currentWave + 1;
+						Upgrades.createAndShowGUI();
+						waveEnd = true;
+					}
+				}
 			}
-			sum = 0;
 		}
 	}
 	public static void main(String[]args){
