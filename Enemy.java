@@ -1,33 +1,42 @@
+package game;
+import java.awt.event.ActionEvent;
+import java.util.Random;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-public class Enemy
-{
-	private int health;
+import javax.swing.Timer;
+
+public class Enemy{
+	
+	Random rand = new Random();
+	public int health;
 	private int damage;
 	private double attSpeed;
-	private int speed;
 	private int mana;
-	
 	public int X1;
 	public int Y1;
-	public int H1;
-	public int W1;
-	
+	public int H1 = 10;
+	public int W1 = 10;
+
 	public Enemy()
 	{
-	 	//health = 200 + (20 * Waves.getCurrentWave());
-	 	//damage = 25 + (2 * Waves.getCurrentWave());
-	 	attSpeed = 1;
-	 	speed = 20;
-	 	//mana = 100 + (5 * Waves.getCurrentWave());
-	 	X1 = 10;
-	 	Y1 = 10;
-	 	H1 = 10;
-	 	W1 = 10;
+		health = 200;
+		damage = 10;
+		attSpeed = 10;
+		mana = 100;
+		X1 = rand.nextInt(450) * 2;
+		Y1 = rand.nextInt(325) * 2;
 	}
-	
-	public Enemy(int a, int b, double c, int d, int e)
+	public Enemy(int a, int b, double c, int d, int e, int f)
 	{
-		
+		health = a;
+		damage = b;
+		attSpeed = c;
+		mana = d;
+		X1 = e;
+		Y1 = f;
 	}
-	
+	public int getHealth()
+	{
+		return health;
+	}
 }
