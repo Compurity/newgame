@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.util.Random;
 import javax.swing.*;
+import javax.swing.JButton;
 public class GameFrame extends JFrame{
 	private static final int CANVAS_WIDTH=1585;
 	private static final int CANVAS_HEIGHT= 822;
@@ -15,6 +16,7 @@ public class GameFrame extends JFrame{
 	private int size =100;
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
 	private static Player player;
+	private static Upgrades upgrades;
 	private static Enemy[] e1 = new Enemy[9]; 
 	private boolean LEFT,RIGHT,UP,DOWN; 
 	private int sum;
@@ -70,6 +72,7 @@ public class GameFrame extends JFrame{
 			{
 				update();
 				repaint();
+				Upgrades.createAndShowGUI();
 			}
 		};
 		new Timer(UPDATE_PERIOD, updateTask).start();
@@ -233,7 +236,7 @@ public class GameFrame extends JFrame{
 	        g.drawString("Health : " + health,60,750);
 	        g.drawString("Mana : " + mana,60,765);
 	        //g.drawString("Enemies Alive : " + enemiesAlive,1200 ,750 );
-	       		g.drawLine(100,600,200,600);
+	       	g.drawLine(100,600,200,600);
 			g.drawLine(500,600,600,600);
 			//First Level Plats
 			g.drawLine(985,600,1085,600);
@@ -256,6 +259,10 @@ public class GameFrame extends JFrame{
 			//g.fillRect(x,y,size,size);
 			//g.setColor(Color.RED);
 			//g.fillRect(x2, y2, size, size);
+			JButton button1 = new JButton();
+			button1.setText("Java Code Geeks");
+			add(button1);
+
 		
 			for(int i = 0; i < e1.length; i++)
 			{
@@ -273,7 +280,8 @@ public class GameFrame extends JFrame{
 				if(sum <= -170)
 				{
 					g.drawRect(500, 100, 500, 500);
-					
+				//	JButton button1 = new JButton();
+
 				}
 					
 			}
@@ -282,6 +290,8 @@ public class GameFrame extends JFrame{
 	}
 	public static void main(String[]args){
 		player = new Player();
+		upgrades = new Upgrades();
+		
 		for(int i = 0; i < e1.length; i++)
 		{
 			e1[i] = new Enemy();
