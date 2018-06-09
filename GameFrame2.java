@@ -19,12 +19,32 @@ public class GameFrame extends JFrame{
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
 	private static Player player;
 	private static Projectile projectile;
+	private static Music music;
 	private static Upgrades upgrades;
 	private static Enemy[] e1 = new Enemy[9];
-	private boolean LEFT,RIGHT,UP,DOWN; 
+	private boolean LEFT,RIGHT,UP,DOWN, ON_PLATFORM; 
 	public int sum;
 	private int manaRegen;
 	private boolean waveEnd = false;
+	
+	public void startJumpAction() {
+		 Thread t1 = new Thread(new Runnable() {
+			    public void run()
+			    {
+			    	int ctn = 0; 
+			    	while(ctn < 3) {
+			    		player.Y-=4; 
+			    		ctn++;
+			    		try {
+							Thread.sleep(30);
+						} catch (InterruptedException e) {
+					    	UP = false;
+						}
+			    	}
+			    	UP = false;
+			    }});  
+			    t1.start();
+	}
 	public GameFrame()
 	{
 		canvas= new DrawCanvas();
@@ -37,9 +57,9 @@ public class GameFrame extends JFrame{
 		this.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				switch(e.getKeyCode()) {
-				case KeyEvent.VK_W:
+				/*case KeyEvent.VK_W:
 						UP = false;
-		            break;
+		            break;*/
 		            case KeyEvent.VK_S:
 		            	DOWN = false; 
 		            break;
@@ -54,6 +74,7 @@ public class GameFrame extends JFrame{
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyCode()) {
 				case KeyEvent.VK_W:
+					if(!UP)
 						UP = true;
 		            break;
 		            case KeyEvent.VK_S:
@@ -112,11 +133,11 @@ public class GameFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				if(sum >= -165) {
+				//if(sum >= -165) {
 					//System.out.println(sum);
 					update();
 					repaint();
-				}			
+				//}			
 			}
 		};
 		new Timer(UPDATE_PERIOD, updateTask).start();
@@ -124,7 +145,6 @@ public class GameFrame extends JFrame{
 	public void update(){
 		x+=xSpeed;
 		y+= ySpeed;
-		
 		manaRegen = manaRegen + 1;
 		if(manaRegen == 25)
 		{
@@ -140,9 +160,14 @@ public class GameFrame extends JFrame{
 		int corner4x=x+size;
 		int corner4y=y+size;*/
 		if(LEFT && UP) {
-			player.X-=4;player.Y-=4; 
+			player.X-=4;
+			if(ON_PLATFORM)
+				startJumpAction();
 		} else if(RIGHT && UP) {
-			player.X+=4;player.Y-=4;
+			player.X+=4;
+			
+			if(ON_PLATFORM)
+				startJumpAction();
 		}else if(LEFT && DOWN) {
 			player.X-=4;player.Y+=4;
 		}else if(RIGHT && DOWN) {
@@ -152,10 +177,12 @@ public class GameFrame extends JFrame{
 		}else if(LEFT) {
 			player.X-=4;
 		}else if(UP) {
-			player.Y-=4;
+			if(ON_PLATFORM)
+				startJumpAction();
 		}else if(DOWN) {
 			player.Y+=4;
 		}
+		
 		for(int i = 0; i < e1.length; i++)
 		{
 			if(e1[i].X1<player.X){
@@ -171,75 +198,95 @@ public class GameFrame extends JFrame{
 		if(player.X > CANVAS_WIDTH){
 			player.X = CANVAS_WIDTH;
 		}
-		if(player.Y>=694){
-			player.Y = 690;
-		}
 		if(player.X<0){
 			player.X = 0;
 		}
+
+		player.Y+=2;
+		if(player.Y>=690){
+			player.Y = 690;
+			ON_PLATFORM = true;
+		}else
 		if(player.Y<0){
 			player.Y = 0;
-		}
+			ON_PLATFORM = true;
+		}else
+			
 		//1st
 		if(player.X >= 100 && player.X <= 200 && player.Y >= 594 && player.Y <= 600 )
 		{
 			player.Y = 590;
-		}
+			ON_PLATFORM = true;
+		} else
 		if(player.X >= 500 && player.X <= 600 && player.Y >= 594 && player.Y <= 600 )
 		{
 			player.Y = 590;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 985 && player.X <= 1085 && player.Y >= 594 && player.Y <= 600 )
 		{
 			player.Y = 590;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 594 && player.Y <= 600 )
 		{
 			player.Y = 590;
-		}
+			ON_PLATFORM = true;
+		}else
 		//2nd
 		if(player.X >= 300 && player.X <= 400 && player.Y >= 494 && player.Y <= 500 )
 		{
 			player.Y = 490;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 700 && player.X <= 800 && player.Y >= 494 && player.Y <= 500 )
 		{
 			player.Y = 490;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 494 && player.Y <= 500 )
 		{
 			player.Y = 490;
-		}
+			ON_PLATFORM = true;
+		}else
 		//3rd
 		if(player.X >= 100 && player.X <= 200 && player.Y >= 394 && player.Y <= 400 )
 		{
 			player.Y = 390;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 500 && player.X <= 600 && player.Y >= 394 && player.Y <= 400 )
 		{
 			player.Y = 390;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 985 && player.X <= 1085 && player.Y >= 394 && player.Y <= 400 )
 		{
 			player.Y = 390;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 394 && player.Y <= 400 )
 		{
 			player.Y = 390;
-		}
+			ON_PLATFORM = true;
+		}else
 		//4th
 		if(player.X >= 300 && player.X <= 400 && player.Y >= 294 && player.Y <= 300 )
 		{
 			player.Y = 290;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 700 && player.X <= 800 && player.Y >= 294 && player.Y <= 300 )
 		{
 			player.Y = 290;
-		}
+			ON_PLATFORM = true;
+		}else
 		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 294 && player.Y <= 300 )
 		{
 			player.Y = 290;
-		}
+			ON_PLATFORM = true;
+		} else 
+			ON_PLATFORM = false;
 		for(int i = 0; i < e1.length; i++)
 		{
 			for(int g = 0;g < e1.length; g++ )
@@ -343,6 +390,8 @@ public class GameFrame extends JFrame{
 		player = new Player();
 		projectile = new Projectile();
 		upgrades = new Upgrades();
+		music = new Music();
+		music.sound();
 		
 		for(int i = 0; i < e1.length; i++)
 		{
@@ -355,4 +404,4 @@ public class GameFrame extends JFrame{
 			}
 		});
 	}
-}
+}    
