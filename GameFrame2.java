@@ -18,6 +18,7 @@ public class GameFrame extends JFrame{
 	private int size =100;
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
 	private static Player player;
+	private static Projectile projectile;
 	private static Upgrades upgrades;
 	private static Enemy[] e1 = new Enemy[9];
 	private boolean LEFT,RIGHT,UP,DOWN; 
@@ -36,36 +37,75 @@ public class GameFrame extends JFrame{
 		this.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				switch(e.getKeyCode()) {
-				case KeyEvent.VK_UP:
+				case KeyEvent.VK_W:
 						UP = false;
 		            break;
-		            case KeyEvent.VK_DOWN:
+		            case KeyEvent.VK_S:
 		            	DOWN = false; 
 		            break;
-		            case KeyEvent.VK_RIGHT:
+		            case KeyEvent.VK_D:
 						RIGHT = false; 
 		            break;
-		            case KeyEvent.VK_LEFT:
+		            case KeyEvent.VK_A:
 						LEFT = false; 
 		            break;
 				}
 			}
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyCode()) {
-				case KeyEvent.VK_UP:
+				case KeyEvent.VK_W:
 						UP = true;
 		            break;
-		            case KeyEvent.VK_DOWN:
+		            case KeyEvent.VK_S:
 					DOWN = true; 
 		            break;
-		            case KeyEvent.VK_RIGHT:
+		            case KeyEvent.VK_D:
 						RIGHT = true; 
 		            break;
-		            case KeyEvent.VK_LEFT:
+		            case KeyEvent.VK_A:
 						LEFT = true; 
 		            break;
 				}
 			}
+		});
+		this.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				e.getX();
+				e.getY();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				e.getX();
+				e.getY();
+				//g.drawRect(player.X,player.Y,5,5);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				e.getX();
+				e.getY();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				e.getX();
+				e.getY();
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+	            e.getX(); 
+	            e.getY();
+	            e.getClickCount();
+			}
+		
 		});
 		ActionListener updateTask= new ActionListener()
 		{
@@ -73,7 +113,7 @@ public class GameFrame extends JFrame{
 			public void actionPerformed(ActionEvent evt)
 			{
 				if(sum >= -165) {
-					System.out.println(sum);
+					//System.out.println(sum);
 					update();
 					repaint();
 				}			
@@ -233,6 +273,7 @@ public class GameFrame extends JFrame{
 			for(int i = 0; i < e1.length; i++)
 			{
 				g.drawRect(e1[i].X1, e1[i].Y1, e1[i].W1, e1[i].H1);
+				g.drawRect(projectile.X2, projectile.Y2, projectile.H2, projectile.W2);
 				g.drawString("Health: " + e1[i].health,e1[i].X1 - 16,e1[i].Y1);
 			}
 			g.drawLine(0,700, 1585, 700);
@@ -300,6 +341,7 @@ public class GameFrame extends JFrame{
 	}
 	public static void main(String[]args){
 		player = new Player();
+		projectile = new Projectile();
 		upgrades = new Upgrades();
 		
 		for(int i = 0; i < e1.length; i++)
