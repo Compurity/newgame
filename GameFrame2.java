@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 import javax.swing.JButton;
@@ -17,23 +18,22 @@ public class GameFrame extends JFrame{
 	private int x=100, y=100, x2=300, y2=300;
 	private int size =100;
 	private int xSpeed=10, ySpeed=20, xSpeed2=5, ySpeed2=5;
-	private static Player player;
-	private static Projectile projectile;
+	public static Player player;
 	private static Music music;
 	private static Upgrades upgrades;
-	private static Enemy[] e1 = new Enemy[9];
+	public static Enemy[] e1 = new Enemy[9];
 	private boolean LEFT,RIGHT,UP,DOWN, ON_PLATFORM; 
 	public int sum;
 	private int manaRegen;
-	private boolean waveEnd = false;
-	
+	public boolean waveEnd = false;
+	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public void startJumpAction() {
 		 Thread t1 = new Thread(new Runnable() {
 			    public void run()
 			    {
 			    	int ctn = 0; 
 			    	while(ctn < 3) {
-			    		player.Y-=4; 
+			    		player.Y-=40; 
 			    		ctn++;
 			    		try {
 							Thread.sleep(30);
@@ -93,9 +93,8 @@ public class GameFrame extends JFrame{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				e.getX();
-				e.getY();
+				System.out.println(player.X);
+				projectiles.add(new Projectile(player.X, player.Y, e.getX(), e.getY()));
 			}
 
 			@Override
@@ -112,11 +111,11 @@ public class GameFrame extends JFrame{
 				e.getY();
 			}
 
-			@Override
+		@Override
 			public void mousePressed(MouseEvent e) {
 				
-				e.getX();
-				e.getY();
+				
+				
 			}
 
 			@Override
@@ -133,7 +132,7 @@ public class GameFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				//if(sum >= -165) {
+				//if(sum <= -165) {
 					//System.out.println(sum);
 					update();
 					repaint();
@@ -183,6 +182,27 @@ public class GameFrame extends JFrame{
 			player.Y+=4;
 		}
 		
+		/*if (CLICKED) {
+			
+			if(projectile.X < X1) {
+				projectile.X+=2;
+				if(projectile.Y< Y1) {
+					projectile.Y+=2;
+				}else 
+					projectile.Y-=2;
+			}else {
+				projectile.X-=2;
+				if(projectile.Y< Y1) {
+					projectile.Y+=2;
+				}else 
+					projectile.Y-=2;
+			}
+				
+		}*/
+		
+		for(int i =0; i< projectiles.size(); i++) {
+			projectiles.get(i).GetNext();
+		}
 		for(int i = 0; i < e1.length; i++)
 		{
 			if(e1[i].X1<player.X){
@@ -194,6 +214,8 @@ public class GameFrame extends JFrame{
 			}else if(e1[i].Y1>player.Y){
 				e1[i].Y1-=2;
 			}
+			
+			
 		}
 		if(player.X > CANVAS_WIDTH){
 			player.X = CANVAS_WIDTH;
@@ -201,8 +223,26 @@ public class GameFrame extends JFrame{
 		if(player.X<0){
 			player.X = 0;
 		}
+		
 
-		player.Y+=2;
+		player.Y+=5;
+		for(int q = 0; q < e1.length;q++)
+		{
+			e1[q].Y1+=5;
+			if(e1[q].X1<0){
+			e1[q].X1 = 0;
+			}
+			if(e1[q].Y1>=690){
+				e1[q].Y1 = 690;
+				ON_PLATFORM = true;
+			}else
+			if(e1[q].Y1<0){
+				e1[q].Y1 = 0;
+				ON_PLATFORM = true;
+			}
+		
+		}
+		
 		if(player.Y>=690){
 			player.Y = 690;
 			ON_PLATFORM = true;
@@ -213,75 +253,75 @@ public class GameFrame extends JFrame{
 		}else
 			
 		//1st
-		if(player.X >= 100 && player.X <= 200 && player.Y >= 594 && player.Y <= 600 )
+		if(player.X >= 100 && player.X <= 200 && player.Y >= 590 && player.Y <= 600 )
 		{
 			player.Y = 590;
 			ON_PLATFORM = true;
 		} else
-		if(player.X >= 500 && player.X <= 600 && player.Y >= 594 && player.Y <= 600 )
+		if(player.X >= 500 && player.X <= 600 && player.Y >= 590 && player.Y <= 600 )
 		{
 			player.Y = 590;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 985 && player.X <= 1085 && player.Y >= 594 && player.Y <= 600 )
+		if(player.X >= 985 && player.X <= 1085 && player.Y >= 590 && player.Y <= 600 )
 		{
 			player.Y = 590;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 594 && player.Y <= 600 )
+		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 590 && player.Y <= 600 )
 		{
 			player.Y = 590;
 			ON_PLATFORM = true;
 		}else
 		//2nd
-		if(player.X >= 300 && player.X <= 400 && player.Y >= 494 && player.Y <= 500 )
+		if(player.X >= 300 && player.X <= 400 && player.Y >= 490 && player.Y <= 500 )
 		{
 			player.Y = 490;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 700 && player.X <= 800 && player.Y >= 494 && player.Y <= 500 )
+		if(player.X >= 700 && player.X <= 800 && player.Y >= 490 && player.Y <= 500 )
 		{
 			player.Y = 490;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 494 && player.Y <= 500 )
+		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 490 && player.Y <= 500 )
 		{
 			player.Y = 490;
 			ON_PLATFORM = true;
 		}else
 		//3rd
-		if(player.X >= 100 && player.X <= 200 && player.Y >= 394 && player.Y <= 400 )
+		if(player.X >= 100 && player.X <= 200 && player.Y >= 390 && player.Y <= 400 )
 		{
 			player.Y = 390;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 500 && player.X <= 600 && player.Y >= 394 && player.Y <= 400 )
+		if(player.X >= 500 && player.X <= 600 && player.Y >= 390 && player.Y <= 400 )
 		{
 			player.Y = 390;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 985 && player.X <= 1085 && player.Y >= 394 && player.Y <= 400 )
+		if(player.X >= 985 && player.X <= 1085 && player.Y >= 390 && player.Y <= 400 )
 		{
 			player.Y = 390;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 394 && player.Y <= 400 )
+		if(player.X >= 1385 && player.X <= 1485 && player.Y >= 390 && player.Y <= 400 )
 		{
 			player.Y = 390;
 			ON_PLATFORM = true;
 		}else
 		//4th
-		if(player.X >= 300 && player.X <= 400 && player.Y >= 294 && player.Y <= 300 )
+		if(player.X >= 300 && player.X <= 400 && player.Y >= 290 && player.Y <= 300 )
 		{
 			player.Y = 290;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 700 && player.X <= 800 && player.Y >= 294 && player.Y <= 300 )
+		if(player.X >= 700 && player.X <= 800 && player.Y >= 290 && player.Y <= 300 )
 		{
 			player.Y = 290;
 			ON_PLATFORM = true;
 		}else
-		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 294 && player.Y <= 300 )
+		if(player.X >= 1185 && player.X <= 1285 && player.Y >= 290 && player.Y <= 300 )
 		{
 			player.Y = 290;
 			ON_PLATFORM = true;
@@ -303,7 +343,7 @@ public class GameFrame extends JFrame{
 						else if(e1[g].Y1 < player.Y)
 							e1[g].Y1 = e1[g].Y1 - 50;
 						else
-							e1[g].Y1 = e1[g].Y1 + 50;
+							player.Y = player.Y - 200;
 					}
 				}
 			}
@@ -320,7 +360,7 @@ public class GameFrame extends JFrame{
 			for(int i = 0; i < e1.length; i++)
 			{
 				g.drawRect(e1[i].X1, e1[i].Y1, e1[i].W1, e1[i].H1);
-				g.drawRect(projectile.X2, projectile.Y2, projectile.H2, projectile.W2);
+				//g.drawRect(projectile.X2, projectile.Y2, projectile.H2, projectile.W2);
 				g.drawString("Health: " + e1[i].health,e1[i].X1 - 16,e1[i].Y1);
 			}
 			g.drawLine(0,700, 1585, 700);
@@ -354,7 +394,9 @@ public class GameFrame extends JFrame{
 			/*JButton button1 = new JButton();
 			button1.setText("Java Code Geeks");
 			add(button1);*/
-		
+			for(int i =0; i < projectiles.size(); i++)
+				g.drawRect(projectiles.get(i).last.x,projectiles.get(i).last.y,projectiles.get(i).H,projectiles.get(i).W);
+			
 			for(int i = 0; i < e1.length; i++)
 			{
 				if(e1[i].health <= 0)
@@ -370,29 +412,33 @@ public class GameFrame extends JFrame{
 				sum = 0;
 				for(int q = 0; q < e1.length; q++)
 					sum = sum + e1[q].X1;
-				if(sum <= -170)
-				{
-					//g.drawRect(500, 100, 500, 500);
-				}
 				if(sum <= -165)
 				{
+					//waveEnd = false;
 					if(waveEnd == false) {
 						gold = gold + 250;
 						currentWave = currentWave + 1;
 						Upgrades.createAndShowGUI();
+						Upgrades.noob = false;
 						waveEnd = true;
 					}
 				}
 			}
 		}
 	}
+		public static void Spawn()
+		{
+			for(int i = 0; i < e1.length; i++)
+			{
+				e1[i] = new Enemy();
+				
+			}
+		}
 	public static void main(String[]args){
 		player = new Player();
-		projectile = new Projectile();
 		upgrades = new Upgrades();
 		music = new Music();
-		music.sound();
-		
+		Music.sound();
 		for(int i = 0; i < e1.length; i++)
 		{
 			e1[i] = new Enemy();
@@ -404,4 +450,4 @@ public class GameFrame extends JFrame{
 			}
 		});
 	}
-}    
+}     
