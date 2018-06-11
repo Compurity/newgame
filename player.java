@@ -27,6 +27,8 @@ public class Player{
 		pAttkS = 1.3;
 		W = 10;
 		H=10; 
+		X= 800;
+		Y= 690;
 	}
 	public Player(int a, int b, int c, int d, int e, int f){
 		Health = a;
@@ -39,4 +41,3 @@ public class Player{
 	}
 
 }
- 
