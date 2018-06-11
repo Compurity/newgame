@@ -1,4 +1,3 @@
-package game;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 import java.awt.event.ActionListener;
@@ -23,8 +22,8 @@ public class Enemy{
 		damage = 10;
 		attSpeed = 10;
 		mana = 100;
-		X1 = rand.nextInt(450) * 2;
-		Y1 = rand.nextInt(325) * 2;
+		X1 = rand.nextInt(2) * 1599;
+		Y1 = 690;
 	}
 	public Enemy(int a, int b, double c, int d, int e, int f)
 	{
