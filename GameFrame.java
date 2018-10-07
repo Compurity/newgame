@@ -8,7 +8,7 @@ import javax.swing.JButton;
 public class GameFrame extends JFrame{
 	private static final int CANVAS_WIDTH=1585;
 	private static final int CANVAS_HEIGHT= 822;
-	private int UPDATE_PERIOD=25;
+	private int UPDATE_PERIOD=10;
 	private DrawCanvas canvas;
 	private int mana = 300;
 	private int health = 500;
